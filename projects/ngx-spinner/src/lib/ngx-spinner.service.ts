@@ -1,4 +1,4 @@
-import {ApplicationRef, ComponentFactoryResolver, ComponentRef, EmbeddedViewRef, Injectable, Injector} from '@angular/core';
+import {ApplicationRef, ComponentFactoryResolver, ComponentRef, EmbeddedViewRef, Inject, Injectable, Injector} from '@angular/core';
 import {Observable, ReplaySubject} from 'rxjs';
 import {filter} from 'rxjs/operators';
 import {NgxSpinner, PRIMARY_SPINNER, Spinner} from './ngx-spinner.enum';
@@ -25,7 +25,7 @@ export class NgxSpinnerService {
    * Creates an instance of NgxSpinnerService.
    * @memberOf NgxSpinnerService
    */
-  constructor(private componentFactoryResolver: ComponentFactoryResolver,
+  constructor(private componentFactoryResolver: ComponentFactoryResolver, @Inject('config') public config: Spinner,
               private injector: Injector, private appRef: ApplicationRef) {
   }
 

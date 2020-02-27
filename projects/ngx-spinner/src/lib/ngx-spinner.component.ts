@@ -1,18 +1,8 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  Inject,
-  Input,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  SimpleChange
-} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChange} from '@angular/core';
 import {NgxSpinnerService} from './ngx-spinner.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {DEFAULTS, LOADERS, NgxSpinner, PRIMARY_SPINNER, Size, Spinner} from './ngx-spinner.enum';
+import {DEFAULTS, LOADERS, NgxSpinner, PRIMARY_SPINNER, Size} from './ngx-spinner.enum';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
@@ -113,17 +103,13 @@ export class NgxSpinnerComponent implements OnDestroy, OnInit, OnChanges {
    *
    * @memberof NgxSpinnerComponent
    */
-  constructor(
-    private spinnerService: NgxSpinnerService,
-    private changeDetector: ChangeDetectorRef,
-    @Inject('config') config: Spinner,
-  ) {
-    this.bdColor = config.bdColor || DEFAULTS.BD_COLOR;
-    this.zIndex = config.zIndex || DEFAULTS.Z_INDEX;
-    this.color = config.color || DEFAULTS.SPINNER_COLOR;
-    this.type = config.type || DEFAULTS.SPINNER_TYPE;
-    this.size = config.size || 'large';
-    this.fullScreen = config.fullScreen || true;
+  constructor(private spinnerService: NgxSpinnerService, private changeDetector: ChangeDetectorRef) {
+    this.bdColor = spinnerService.config.bdColor || DEFAULTS.BD_COLOR;
+    this.zIndex = spinnerService.config.zIndex || DEFAULTS.Z_INDEX;
+    this.color = spinnerService.config.color || DEFAULTS.SPINNER_COLOR;
+    this.type = spinnerService.config.type || DEFAULTS.SPINNER_TYPE;
+    this.size = spinnerService.config.size || 'large';
+    this.fullScreen = spinnerService.config.fullScreen || true;
     this.name = PRIMARY_SPINNER;
 
     this.divArray = [];

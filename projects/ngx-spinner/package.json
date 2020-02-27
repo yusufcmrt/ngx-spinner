@@ -1,9 +1,9 @@
 {
-  "name": "ngx-spinner",
-  "version": "9.1.1",
+  "name": "@yusufcmrt/ngx-spinner",
+  "version": "9.1.2",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Napster2210/ngx-spinner.git"
+    "url": "https://github.com/yusufcmrt/ngx-spinner.git"
   },
   "author": {
     "name": "Yuvraj Chauhan",
@@ -45,5 +45,10 @@
     "@angular/common": "~9.0.2",
     "@angular/core": "~9.0.2"
   },
-  "publishConfig": { "registry": "https://npm.pkg.github.com/" }
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
+  "ngPackage": {
+    "lib": {
+      "entryFile": "src/public_api.ts"
+    }
+  }
 }

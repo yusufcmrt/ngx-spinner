@@ -20,10 +20,10 @@
     ],
     "paths": {
       "ngx-spinner": [
-        "dist/ngx-spinner"
+        "projects/ngx-spinner/dist"
       ],
       "ngx-spinner/*": [
-        "dist/ngx-spinner/*"
+        "projects/ngx-spinner/dist/*"
       ]
     }
   }
