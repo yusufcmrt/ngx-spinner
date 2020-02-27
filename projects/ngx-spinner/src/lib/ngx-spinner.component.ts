@@ -1,18 +1,19 @@
 import {
-  Component,
-  OnDestroy,
-  Input,
-  OnInit,
-  OnChanges,
-  SimpleChange,
   ChangeDetectionStrategy,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChange
 } from '@angular/core';
-import { NgxSpinnerService } from './ngx-spinner.service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { LOADERS, DEFAULTS, Size, NgxSpinner, PRIMARY_SPINNER } from './ngx-spinner.enum';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import {NgxSpinnerService} from './ngx-spinner.service';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {DEFAULTS, LOADERS, NgxSpinner, PRIMARY_SPINNER, Size, Spinner} from './ngx-spinner.enum';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'ngx-spinner',
@@ -21,13 +22,13 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('fadeIn', [
-      state('in', style({ opacity: 1 })),
+      state('in', style({opacity: 1})),
       transition(':enter', [
-        style({ opacity: 0 }),
+        style({opacity: 0}),
         animate(300)
       ]),
       transition(':leave',
-        animate(200, style({ opacity: 0 })))
+        animate(200, style({opacity: 0})))
     ])
   ]
 })
@@ -98,13 +99,13 @@ export class NgxSpinnerComponent implements OnDestroy, OnInit, OnChanges {
    * Show spinner
    *
    * @memberof NgxSpinnerComponent
-  **/
+   **/
   show: boolean;
   /**
    * Unsubscribe from spinner's observable
    *
    * @memberof NgxSpinnerComponent
-  **/
+   **/
   ngUnsubscribe: Subject<void> = new Subject();
 
   /**
@@ -112,19 +113,24 @@ export class NgxSpinnerComponent implements OnDestroy, OnInit, OnChanges {
    *
    * @memberof NgxSpinnerComponent
    */
-  constructor(private spinnerService: NgxSpinnerService, private changeDetector: ChangeDetectorRef) {
-    this.bdColor = DEFAULTS.BD_COLOR;
-    this.zIndex = DEFAULTS.Z_INDEX;
-    this.color = DEFAULTS.SPINNER_COLOR;
-    this.type = DEFAULTS.SPINNER_TYPE;
-    this.size = 'large';
-    this.fullScreen = true;
+  constructor(
+    private spinnerService: NgxSpinnerService,
+    private changeDetector: ChangeDetectorRef,
+    @Inject('config') config: Spinner = {},
+  ) {
+    this.bdColor = config.bdColor || DEFAULTS.BD_COLOR;
+    this.zIndex = config.zIndex || DEFAULTS.Z_INDEX;
+    this.color = config.color || DEFAULTS.SPINNER_COLOR;
+    this.type = config.type || DEFAULTS.SPINNER_TYPE;
+    this.size = config.size || 'large';
+    this.fullScreen = config.fullScreen || true;
     this.name = PRIMARY_SPINNER;
 
     this.divArray = [];
     this.divCount = 0;
     this.show = false;
   }
+
   /**
    * Initialization method
    *
@@ -145,6 +151,7 @@ export class NgxSpinnerComponent implements OnDestroy, OnInit, OnChanges {
         this.changeDetector.markForCheck();
       });
   }
+
   /**
    * To set default ngx-spinner options
    *
@@ -163,7 +170,8 @@ export class NgxSpinnerComponent implements OnDestroy, OnInit, OnChanges {
       show: this.show,
       zIndex: this.zIndex,
     });
-  }
+  };
+
   /**
    * On changes event for input variables
    *
@@ -183,6 +191,7 @@ export class NgxSpinnerComponent implements OnDestroy, OnInit, OnChanges {
       }
     }
   }
+
   /**
    * To get class for spinner
    *
@@ -207,6 +216,7 @@ export class NgxSpinnerComponent implements OnDestroy, OnInit, OnChanges {
     }
     return 'la-' + type + ' ' + sizeClass;
   }
+
   /**
    * Check if input variables have changed
    *
@@ -215,6 +225,7 @@ export class NgxSpinnerComponent implements OnDestroy, OnInit, OnChanges {
   onInputChange() {
     this.spinner.class = this.getClass(this.spinner.type, this.spinner.size);
   }
+
   /**
    * Component destroy event
    *
