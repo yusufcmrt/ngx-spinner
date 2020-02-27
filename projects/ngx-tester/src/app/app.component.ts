@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NgxSpinnerService } from 'ngx-spinner';
+import {Component} from '@angular/core';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 /**
  * App Component
@@ -110,15 +110,16 @@ export class AppComponent {
    * @param {NgxSpinnerService} spinner Spinner service
    * @memberof AppComponent
    */
-  constructor(private spinner: NgxSpinnerService) { }
+  constructor(private spinner: NgxSpinnerService) {
+  }
 
   /**
    * To show/hide spinner
    *
    * @memberof AppComponent
    */
-  showSpinner(name: string) {
-    this.spinner.show(name);
+  showSpinner(name?: string) {
+    this.spinner.show(name, this.spinnerConfig);
     this.spinner.hide(name, 3000);
   }
 }

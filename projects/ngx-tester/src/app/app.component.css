@@ -101,3 +101,8 @@
 .code .input-name {
   color: #9cdcfe;
 }
+
+.buttons {
+  display: flex;
+  align-items: flex-start;
+}
