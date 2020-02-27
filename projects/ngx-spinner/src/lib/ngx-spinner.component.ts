@@ -116,7 +116,7 @@ export class NgxSpinnerComponent implements OnDestroy, OnInit, OnChanges {
   constructor(
     private spinnerService: NgxSpinnerService,
     private changeDetector: ChangeDetectorRef,
-    @Inject('config') config: Spinner = {},
+    @Inject('config') config: Spinner,
   ) {
     this.bdColor = config.bdColor || DEFAULTS.BD_COLOR;
     this.zIndex = config.zIndex || DEFAULTS.Z_INDEX;

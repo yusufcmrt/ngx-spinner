@@ -20,7 +20,7 @@ export class NgxSpinnerModule {
   static forRoot(config?: Spinner): ModuleWithProviders {
     return {
       ngModule: NgxSpinnerModule,
-      providers: [{provide: 'config', useValue: config}],
+      providers: [{provide: 'config', useValue: config || {}}],
     };
   }
 }
