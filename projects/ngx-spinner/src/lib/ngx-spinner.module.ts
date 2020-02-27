@@ -1,7 +1,6 @@
 import {ModuleWithProviders, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {NgxSpinnerComponent} from './ngx-spinner.component';
-import {NgxSpinnerService} from './ngx-spinner.service';
 import {Spinner} from './ngx-spinner.enum';
 
 @NgModule({
